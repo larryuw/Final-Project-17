@@ -6,19 +6,13 @@ library("reshape2")
 library("stringr")
 library("tidyr")
 
-#source("rentbuyScript.R")
-#source("idealScript.R")
+# set the source file
 source("finalScript.R")
 
 #Define a server function
 my_server <- function(input, output) {
-  
-  
-  
-  ################
+
   output$rent_plot <- renderPlot({
-    
-    #source("rent_buy_dataset.R", local = TRUE)
     
     rentdata <- filter(filtered_rent, RegionName == input$chosen_county)
     rentdata <- mutate(rentdata, 
@@ -42,6 +36,7 @@ my_server <- function(input, output) {
            paste0("$", rentdata$'2019'), pos = 1)
     
   })
+  
   output$buy_plot <- renderPlot({
     buydata <- filter(filtered_buy, RegionName == input$chosen_county)
     buydata <-  mutate(buydata, 
@@ -77,18 +72,16 @@ my_server <- function(input, output) {
   
   output$countyNumber <- renderUI({
     checkboxGroupInput("County", "Pick a county", output_newData()$county)
-    # numberCounties <- nrow(output_newData())
-    #  sliderInput("numberCounties", "Select number of counties you want displayed: ",
-    #       min = 0, max = numberCounties, value = 4)
   })
   
   output$informationForCounties <- renderPlot({
     filtered_county_set <- filter(output_newData(), county %in% input$County)
-    ggplot(filtered_county_set, aes(county, fill = county )) + geom_col(aes(y=POPDEN_2018)) + scale_fill_hue(c=45, l=80) + theme_minimal() + labs(title =
-                                                                                                                                                    "Graph showing population densities for each county \n in the given price range in Washington",
-                                                                                                                                                  x = "County",
-                                                                                                                                                  y = "Population Density in 2018") + theme(plot.title = element_text(color = "black", size = 20, 
-                                                                                                                                                                                                                      face = "bold", hjust = 0.5))
+    ggplot(filtered_county_set, aes(county, fill = county )) + geom_col(aes
+    (y=POPDEN_2018)) + scale_fill_hue(c=45, l=80) + theme_minimal() + labs(title
+  = "Graph showing population densities for each county \n in the given price 
+  range in Washington", x = "County", y = "Population Density in 2018") + 
+    theme(plot.title = element_text(color = "black", size = 20, face = "bold",
+                                    hjust = 0.5))
   })
   
   
@@ -101,24 +94,37 @@ my_server <- function(input, output) {
     
     new_data_set <- full_join(county_data,output_newData(), by = "county")
     if(input$mapType == "Criminal Incidents by County") {
-      ggplot()+geom_polygon(data = new_data_set, aes(x = long, y = lat, group=group, col=county, fill = 2 * Rank.by.Percent)) + scale_colour_hue(na.value = "white") + theme_minimal() + theme(legend.position = "none") 
+      ggplot()+geom_polygon(data = new_data_set, aes(x = long, y = lat, 
+      group=group, col=county, fill = 2 * Rank.by.Percent)) + theme_minimal() + 
+        theme(legend.position = "none") 
     }
     else {
-      ggplot()+geom_polygon(data = new_data_set, aes(x = long, y = lat, group=group, col=county, fill = 2 * rank)) + scale_colour_hue(na.value = "white") + theme_minimal() + theme(legend.position = "none")
+      ggplot()+geom_polygon(data = new_data_set, aes(x = long, y = lat, 
+      group=group, col=county, fill = 2 * rank)) + scale_colour_hue(na.value = 
+                "white") + theme_minimal() + theme(legend.position = "none") +
+        opts(title="geom_polygon", plot.title=theme_text(size=40, vjust=1.5))
     }
-    
     
     
   })
-  br()
-  br()
+
+  
   output$descriptionOfMap <- renderText({
     paste("This displays a map of washington and is colored based on high school
           drop out rates or criminal rates in counties in Washington. The darker the county 
-          color, the higher the dropout or criminal incident prevalence rate. This data becomes especially interesting as we can
-          see where in Washington each of these characteristics are more prevalent and with every change in the price range or selection of what data to display
-          through the buttons, the data gets updated.Below we have another charasteristic of counties which is their population density plotted in a bar
-          graph allowing you to compare densities across all counties within the price range.")
+          color, the higher the dropout or criminal incident prevalence rate, and the
+grayed counties are ones that do not have any data on them or do not fit the price range criteria.
+This data becomes especially interesting as we can
+          see where in Washington each of these characteristics are more prevalent and 
+with every change in the price range or selection of what data to display
+          through the buttons, the data gets updated.                                                        
+
+Below we have another charasteristic of counties which is their population density plotted in a bar
+          graph allowing you to compare densities across all counties within the price range.
+          
+Usually counties that have higher population densities were showed to also have higher dropout rates 
+and higher criminal incidents. There is additionally much more housing in a price range lower 
+          than $500000 then there is in the upper range.")
   })
  
   output$overall_value <- renderPlot({

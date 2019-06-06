@@ -75,7 +75,7 @@ my_ui <- navbarPage( theme = shinytheme("superhero"),
   #fourth tab： Determine the ideal county
   tabPanel(
     "Ideal County",
-    titlePanel("Ideal Location for a 3 Bedroom in Washington"),
+    titlePanel("Ideal Counties for Houses in Washington"),
     
     # Sidebar with a slider input for number of bins 
     sidebarLayout(

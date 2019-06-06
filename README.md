@@ -18,6 +18,15 @@
 #### Additionally the datasets are useful because they allow real estate agents to examine trends in housing and make predictions on what rates will be in the future. They allow comparing trends across different categories much easier; for example, dropping high school dropout rates should see increased retail in county locations. 
 
 
+## Datasets we used
+> [High School Dropout Data by county](https://catalog.data.gov/dataset/high-school-dropout-statistics-by-county-2012-2013-school-year-5-year-cohort-dropout-rates)
+
+>[Population Densities bycounty](https://catalog.data.gov/dataset/waofm-april-1-population-density-by-county-2000-to-present-e7e7b)    
+
+>[Data on Housing by County - MedianPrice, Rental Price, Home Value](https://www.zillow.com/research/data/. )
+
+>[Criminal Statistics by County](https://catalog.data.gov/dataset/criminal-justice-data-book-3419c)
+
 
 Team 17: Larry Li,  Pragyna Naik, Stefanie Meyer
 
