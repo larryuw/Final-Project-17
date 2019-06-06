@@ -27,6 +27,9 @@
 
 >[Criminal Statistics by County](https://catalog.data.gov/dataset/criminal-justice-data-book-3419c)
 
+##Our project -- published on shiny
+>[Our Project](https://larryuw.shinyapps.io/Final-Project-17/)
+
 
 Team 17: Larry Li,  Pragyna Naik, Stefanie Meyer
 

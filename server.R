@@ -5,7 +5,9 @@ library("dplyr")
 library("reshape2")
 library("stringr")
 library("tidyr")
-
+library("markdown")
+library("maps")
+library("mapproj")
 # set the source file
 source("finalScript.R")
 
@@ -101,8 +103,7 @@ my_server <- function(input, output) {
     else {
       ggplot()+geom_polygon(data = new_data_set, aes(x = long, y = lat, 
       group=group, col=county, fill = 2 * rank)) + scale_colour_hue(na.value = 
-                "white") + theme_minimal() + theme(legend.position = "none") +
-        opts(title="geom_polygon", plot.title=theme_text(size=40, vjust=1.5))
+                "white") + theme_minimal() + theme(legend.position = "none")
     }
     
     

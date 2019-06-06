@@ -1,6 +1,14 @@
 library("shiny")
 library("ggplot2")
 library("shinythemes")
+library("markdown")
+library("dplyr")
+library("reshape2")
+library("stringr")
+library("tidyr")
+library("markdown")
+library("maps")
+library("mapproj")
 
 source("finalScript.R")
 
